@@ -4,6 +4,7 @@ class KnightPathFinder
 
     VALID_MOVES = [[-2,1], [-2,-1], [-1,-2], [1,-2],
                     [2,-1], [2,1], [-1,2], [1,2]]
+                    #=> add all those to a position in form of [x,y] to get possible moves of the knight
 
     attr_reader :current_position
 
@@ -32,6 +33,9 @@ class KnightPathFinder
     def new_move_positions(pos) #=> Returns 2D-Array of possible next moves, without such that have already been considered
         new_moves = []
         potential_moves = valid_moves(pos)
+        
+        #> Get potential moves, go through them
+        #> If they have not yet been considered, add them to new_moves and add to "considered"
 
         potential_moves.each do |move| 
             if !@considered_moves.include?(move)
@@ -39,6 +43,7 @@ class KnightPathFinder
                 @considered_moves << move
             end
         end
+        
         new_moves
     end
 
