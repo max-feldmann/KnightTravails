@@ -9,14 +9,14 @@ class KnightPathFinder
     attr_reader :current_position, :root_node, :starting_position
 
     def initialize(starting_position)
-        @current_position = starting_position
         @considered_moves = [starting_position] #=> Initialized w/ starting pos.
+        @starting_position = starting_position
 
         build_move_tree
     end
 
     def valid_moves(pos) #=> Returns 2D-Array of valid Moves e.g. [[3,3], ...]
-        potentials = []
+        valids = []
 
         VALID_MOVES.each do |move| # go through predefined moves and add them to the position.
             possible_move = [0,0]
@@ -24,12 +24,12 @@ class KnightPathFinder
             possible_move[1] = pos[1] + move[1]
 
             unless possible_move.any? {|val| val > 7} # Make sure move is on the chess board (8x8)
-                potentials << possible_move
+                valids << possible_move
             end
 
         end
 
-        potentials
+        valids
     end
 
     def new_move_positions(pos) #=> Returns 2D-Array of possible next moves, without such that have already been considered
@@ -41,7 +41,7 @@ class KnightPathFinder
 
         potential_moves.each do |move| 
             if !@considered_moves.include?(move)
-                new_moves << move 
+                    new_moves << move 
                 @considered_moves << move
             end
         end
@@ -92,4 +92,4 @@ end
 
 
 kpf = KnightPathFinder.new([0, 0])
-p kpf.find_path([7, 7])
+p kpf.find_path([2, 1])

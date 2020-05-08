@@ -9,7 +9,7 @@ module Searchable
   
       nil
     end
-  end
+end
 
 class PolyTreeNode
 
